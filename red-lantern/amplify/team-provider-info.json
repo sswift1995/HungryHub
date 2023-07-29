@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-redlantern-staging-41437-authRole",
+      "UnauthRoleArn": "arn:aws:iam::969868071792:role/amplify-redlantern-staging-41437-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::969868071792:role/amplify-redlantern-staging-41437-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-redlantern-staging-41437-deployment",
+      "UnauthRoleName": "amplify-redlantern-staging-41437-unauthRole",
+      "StackName": "amplify-redlantern-staging-41437",
+      "StackId": "arn:aws:cloudformation:us-east-2:969868071792:stack/amplify-redlantern-staging-41437/6e573e90-2dc6-11ee-a819-0a23ce2c4719",
+      "AmplifyAppId": "d2gma725eb4rtw"
+    },
+    "categories": {
+      "auth": {
+        "RedLantern": {}
+      }
+    }
+  }
+}
