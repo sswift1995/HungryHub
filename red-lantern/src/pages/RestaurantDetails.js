@@ -1,3 +1,5 @@
+//enter menu and details about the address
+
 import React from "react";
 import restaurants from '../../src/data/restaurants.json'
 
