@@ -2,6 +2,8 @@ import HomeScreen from './pages/HomeScreen';
 import Navbar from './components/Navbar';
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
