@@ -6,28 +6,22 @@ import restaurants from '../../data/restaurants.json';
 import { DataStore } from 'aws-amplify'
 import {Restaurant} from '../../models'
 
+
 function HomeScreen() {
   const [restaurants, setRestaurants] = useState([]);
 
-  const fetchRestaurants = async () => {
-    const results = await DataStore.query(Restaurant)
-    setRestaurants(results)
-  }
-
   useEffect(() => {
-    fetchRestaurants();
+    DataStore.query(Restaurant)
+      .then(setRestaurants)
   }, [])
-
 
   return (
     <div className="container">
       <div className="row">
         {restaurants.map((restaurant, index) => (
-          <div key={index} className="col-md-4 mb-4">
-            {/* Wrap RestaurantItem with an anchor tag */}
-            <a href={`/restaurants/${restaurant.id}`}>
-              <RestaurantItem restaurant={restaurant} />
-            </a>
+
+          <div key={index} className="col-md-4 mb-4" style={{ cursor: 'pointer' }}>
+            <RestaurantItem restaurant={restaurant} />
           </div>
         ))}
       </div>
