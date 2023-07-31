@@ -2,6 +2,9 @@ import HomeScreen from './pages/HomeScreen';
 import Navbar from './components/Navbar';
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
+import RestaurantDetails from './pages/RestaurantDetails';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
@@ -52,6 +55,7 @@ function App() {
           <Router>
             <Routes>
               <Route path='/' element={<HomeScreen />} />
+              <Route path='/restaurants/:id' element={<RestaurantDetails />} />
               <Route path='/login' element={<LoginPage />} />
               <Route path='/register' element={<RegisterPage />} />
             </Routes>
@@ -61,6 +65,5 @@ function App() {
     </Authenticator>
   );
 }
-
 
 export default App;
