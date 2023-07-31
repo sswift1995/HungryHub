@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { Bounce } from 'react-activity';
-import restaurants from '../../src/data/restaurants.json'
 import { DataStore } from "aws-amplify";
 import { Restaurant, Meal } from "../models";
 

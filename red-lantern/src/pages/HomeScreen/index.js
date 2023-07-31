@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import RestaurantItem from '../../components/RestaurantItem/index';
-import restaurants from '../../data/restaurants.json';
 import { DataStore } from 'aws-amplify'
 import { Restaurant } from '../../models'
 
