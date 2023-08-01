@@ -1,10 +1,12 @@
 import HomeScreen from './pages/HomeScreen';
-import Navbar from './components/Navbar';
+import CustomNavbar from './components/Navbar';
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import RestaurantDetails from './pages/RestaurantDetails';
+import Item from './pages/item';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AuthContextProvider from '../src/contexts/AuthContext'
+import Footer from './components/Footer';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
@@ -40,7 +42,7 @@ function App() {
       return (
         <View textAlign="center" padding={tokens.space.large}>
           <Text color={tokens.colors.neutral[80]}>
-            &copy; 2022 Jeremy Lehmann, Jeffrey Smith, Jasmina Topalovic, Syrinthia Swift, Aphra
+            &copy; 2022 Jeremy Lehmann, Jeffrey Smith, Jasmina Topalovic, Syrinthia Swift, Aphra Hiat
           </Text>
         </View>
       );
@@ -51,18 +53,21 @@ function App() {
     <Authenticator loginMechanisms={['email']} components={components}>
       {({ signOut, user }) => (
         <div>
-          <Navbar signOut={handleSignOut} />
+          <CustomNavbar signOut={handleSignOut} />
           <Router>
             <Routes>
               <Route path='/' element={<HomeScreen />} />
               <Route path='/restaurants/:id' element={<RestaurantDetails />} />
+              <Route path='/restaurants/:id/item' element={<Item />} />
               <Route path='/login' element={<LoginPage />} />
               <Route path='/register' element={<RegisterPage />} />
             </Routes>
           </Router>
+          <Footer />
         </div>
       )}
     </Authenticator>
+    
   );
 }
 
