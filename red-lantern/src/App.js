@@ -4,7 +4,7 @@ import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import RestaurantDetails from './pages/RestaurantDetails';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import AuthContextProvider from '../src/contexts/AuthContext'
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
