@@ -53,7 +53,7 @@ export default function CustomNavbar({ signOut }) {
         <Container fluid>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
-            
+
           </Navbar.Collapse>
         </Container>
       </Navbar>
