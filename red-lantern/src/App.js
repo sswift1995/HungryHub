@@ -5,6 +5,7 @@ import RegisterPage from './pages/auth/RegisterPage';
 import RestaurantDetails from './pages/RestaurantDetails';
 import Item from './pages/item';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Footer from './components/Footer';
 
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
@@ -41,7 +42,7 @@ function App() {
       return (
         <View textAlign="center" padding={tokens.space.large}>
           <Text color={tokens.colors.neutral[80]}>
-            &copy; 2022 Jeremy Lehmann, Jeffrey Smith, Jasmina Topalovic, Syrinthia Swift, Aphra
+            &copy; 2022 Jeremy Lehmann, Jeffrey Smith, Jasmina Topalovic, Syrinthia Swift, Aphra Hiat
           </Text>
         </View>
       );
@@ -62,9 +63,11 @@ function App() {
               <Route path='/register' element={<RegisterPage />} />
             </Routes>
           </Router>
+          <Footer />
         </div>
       )}
     </Authenticator>
+    
   );
 }
 
