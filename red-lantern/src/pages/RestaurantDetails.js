@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Bounce } from 'react-activity';
 import { DataStore } from "aws-amplify";
 import { Restaurant, Meal } from "../models";
@@ -8,6 +8,12 @@ const RestaurantDetails = () => {
     const { id } = useParams();
     const [restaurant, setRestaurant] = useState(null);
     const [meals, setMeals] = useState([]);
+
+    const navigation = useNavigate();
+
+    const handleClick = () => {
+        navigation(`/restaurants/${restaurant.id}/item`)
+    }
 
     useEffect(() => {
         const fetchRestaurant = async () => {
@@ -33,33 +39,60 @@ const RestaurantDetails = () => {
     console.log(restaurant)
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
-            <img style={{ width: '100%', aspectRatio: 5 / 3, marginBottom: 5, margin: 5, padding: 10 }} src={restaurant.image} alt={restaurant.name} />
+        <div className="container">
 
-            <div style={{ background: 'white', padding: 20, position: 'absolute', top: 90, left: 20, borderRadius: 50 }}>
-                {/* Put an left arrow icon */}
-            </div>
-
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <div>
-                    <p className='name' style={{ fontWeight: 900 }}>{restaurant.name}</p>
-                    <p className='details' style={{ color: 'grey', fontSize: 12 }}>${restaurant.deliveryFee.toFixed(2)} &nbsp;&nbsp; {restaurant.minDeliveryTime} - {restaurant.maxDeliveryTime} minutes</p>
+            <div className="row my-4" >
+                <div className="col-md-12">
+                    <img
+                        src={restaurant.image}
+                        alt={restaurant.name}
+                        className="img-fluid rounded"
+                        style={{ width: '100%' }}
+                    />
                 </div>
-
-                <div style={{ backgroundColor: 'lightgrey', borderRadius: 10, width: 30, height: 30, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <p>{restaurant.rating.toFixed(1)}</p>
-                </div>
-            </div>
-            <div>
-                {meals.map((meal) => (
+                <div className="col-md-6" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div>
-                        <p key={meal.id}>{meal.name}</p>
-                        <img key={meal.id} src={meal.image} alt={meal.name} />
-                        <p key={meal.id}>{meal.description}</p>
-                        <p key={meal.id}>{meal.price}</p>
+                        <p className="name fw-bold mb-0" style={{ fontSize: '24px', color: '#333' }}>
+                            {restaurant.name}
+                        </p>
+                        <p className="details text-muted fs-6 mb-0">
+                            ${restaurant.deliveryFee.toFixed(2)} | {restaurant.minDeliveryTime} - {restaurant.maxDeliveryTime} minutes
+                        </p>
                     </div>
-                ))}
+                    <div className="bg-light rounded-circle d-flex align-items-center justify-content-center" style={{ width: '40px', height: '40px', boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.2)' }}>
+                        <p className="fw-bold mb-0" style={{ fontSize: '18px', color: '#333' }}>
+                            {restaurant.rating.toFixed(1)}
+                        </p>
+                    </div>
+                </div>
             </div>
+
+
+
+            <div className="col-md-12 mb-4">
+                <div className='card border-0 h-100'>
+                    {meals.map((meal) => (
+                        <div className="card-body shadow d-flex align-items-center gap-3" key={meal.id} onClick={handleClick} style={{ cursor: 'pointer' }}>
+                            <img
+                                src={meal.image}
+                                alt={meal.name}
+                                className='rounded'
+                                style={{ width: '100px', height: '100px' }}
+                            />
+                            <div className="flex-grow-1">
+                                <h5 className="card-title fw-bold mb-0">{meal.name}</h5>
+                                <p className="card-text fs-6 mb-3 text-muted">
+                                    {meal.description}
+                                </p>
+                                <p className="card-text fs-5 fw-bold text-success">
+                                    {meal.price}
+                                </p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
         </div>
     );
 };

@@ -72,5 +72,4 @@ export default function CustomNavbar({ signOut }) {
                 </Container>
             </Navbar>
         </div>
-    );
 }
