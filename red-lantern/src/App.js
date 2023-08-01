@@ -5,8 +5,8 @@ import RegisterPage from './pages/auth/RegisterPage';
 import RestaurantDetails from './pages/RestaurantDetails';
 import Item from './pages/item';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AuthContextProvider from '../src/contexts/AuthContext'
 import Footer from './components/Footer';
-
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 

@@ -1,22 +1,24 @@
-import { createContext, useEffect, useState } from "react";
-import { Auth } from "aws-amplify";
 
-const AuthContext = createContext({});
+import { createContext, useEffect } from "react";
+import { useState } from 'react/cjs/react.production.min';
+import { Auth } from 'aws-amplify'
 
-const AuthContextProvider = ({ children }) => {
-    const [authUser, setAuthUser] = useState(null)
-    const [dbUser, setDbUser] = useState(null)
+
+const AuthContext = createContext ({ children });
+
+const AuthContextProvider = () => {
+    const [authUser, setAuthUser] = useState(null);
+    const [dbUser, setDbUser] = useState(null);
 
     useEffect(() => {
-        Auth.currentAuthenticatedUser({ bypassCache: true })
-            .then(setAuthUser)
-    }, [])
+        Auth.currentAuthenticatedUser({ bypassCache: true }).then(setAuthUser);
+}, []);
 
-    console.log('auth user: ', authUser)
+    const sub = authUser?.attributes?.sub;
 
     return (
-        <AuthContextProvider value={{ authUser, dbUser }}>
-            {children}
-        </AuthContextProvider>
+        <AuthContext.Provider value={{ authUser, dbUser }}>{children}</AuthContext.Provider>
     )
 }
+
+export default AuthContextProvider;
