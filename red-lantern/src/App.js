@@ -61,6 +61,8 @@ function App() {
               <Route path='/restaurants/:id/item' element={<Item />} />
               <Route path='/login' element={<LoginPage />} />
               <Route path='/register' element={<RegisterPage />} />
+              <Route path='/profile' element={<profileScreen />} />
+              {/* <Route path='/' element={loading ? () => <profileScreen/> : () => <HomeScreen/>} /> */}
             </Routes>
           </Router>
           <Footer />

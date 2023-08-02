@@ -1,12 +1,11 @@
 
-import { createContext, useEffect } from "react";
-import { useState } from 'react/cjs/react.production.min';
+import { createContext, useContext, useEffect, useState } from "react";
 import { Auth } from 'aws-amplify'
 
 
-const AuthContext = createContext ({ children });
+const AuthContext = createContext ({});
 
-const AuthContextProvider = () => {
+const AuthContextProvider = ({children}) => {
     const [authUser, setAuthUser] = useState(null);
     const [dbUser, setDbUser] = useState(null);
 
@@ -17,8 +16,10 @@ const AuthContextProvider = () => {
     const sub = authUser?.attributes?.sub;
 
     return (
-        <AuthContext.Provider value={{ authUser, dbUser }}>{children}</AuthContext.Provider>
+        <AuthContext.Provider value={{ authUser, dbUser, sub }}>{children}</AuthContext.Provider>
     )
 }
 
 export default AuthContextProvider;
+
+export const useAuthContext = () => useContext(AuthContext)

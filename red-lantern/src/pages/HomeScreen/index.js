@@ -3,17 +3,14 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import RestaurantItem from '../../components/RestaurantItem/index';
-import restaurants from '../../data/restaurants.json';
 import { DataStore } from 'aws-amplify';
 import {Restaurant} from '../../models';
-import {useAuthContext} from '../contexts/AuthContext';
-import { DataStore } from 'aws-amplify'
-import { Restaurant } from '../../models'
-
+import {useAuthContext} from '../../contexts/AuthContext';
+import {User} from '../../models';
 
 
 function HomeScreen() {
-  const [restaurants, setRestaurants] = useState([]);
+  const [restaurants, setRestaurants] = useState([])
 
   useEffect(() => {
     DataStore.query(Restaurant)
