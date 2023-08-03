@@ -10,8 +10,9 @@ import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import RestaurantDetails from './pages/RestaurantDetails';
 import Item from './pages/item';
-import ProfileScreen from './pages/ProfileScreen';
+import ProfileScreen from './pages/profileScreen';
 import Cart from './pages/cart';
+import Footer from './components/Footer'
 import { useAuthContext } from './contexts/AuthContext';
 import { CartProvider } from './contexts/CartContext';
 
@@ -80,7 +81,9 @@ function App() {
           </div>
         )}
       </Authenticator>
+      <Footer />
     </CartProvider>
+
   );
 }
 
