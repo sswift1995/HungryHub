@@ -2,8 +2,8 @@ import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import { useNavigate } from 'react-router-dom';
+
 
 
 const RestaurantItem = ({ restaurant }) => {
@@ -14,7 +14,7 @@ const RestaurantItem = ({ restaurant }) => {
     }
 
     return (
-        <Card onClick={handleClick} className='h-100'>
+        <Card className='h-100' onClick={handleClick}>
             <Card.Img variant='top' src={restaurant.image} alt={restaurant.name} style={{ height: '200px', objectFit: 'cover' }} />
             <Card.Body>
                 <Card.Title>{restaurant.name}</Card.Title>
