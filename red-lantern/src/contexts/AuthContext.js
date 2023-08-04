@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useContext } from "react";
 import { Auth } from "aws-amplify";
 
 const AuthContext = createContext({});
@@ -12,11 +12,15 @@ const AuthContextProvider = ({ children }) => {
             .then(setAuthUser)
     }, [])
 
-    console.log('auth user: ', authUser)
+    const sub = authUser?.attribute?.sub;
 
     return (
-        <AuthContextProvider value={{ authUser, dbUser }}>
+        <AuthContextProvider value={{ authUser, dbUser, sub }}>
             {children}
         </AuthContextProvider>
     )
 }
+
+export default AuthContextProvider;
+
+export const useAuthContext = () => useContext(AuthContext)

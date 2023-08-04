@@ -11,8 +11,8 @@ const RestaurantDetails = () => {
 
     const navigation = useNavigate();
 
-    const handleClick = () => {
-        navigation(`/restaurants/${restaurant.id}/item`)
+    const handleClick = (meal) => {
+        navigation(`/restaurants/${restaurant.id}/item/${meal.id}`)
     }
 
     useEffect(() => {
@@ -28,7 +28,6 @@ const RestaurantDetails = () => {
             }
         };
 
-
         fetchRestaurant();
     }, [id]);
 
@@ -41,7 +40,7 @@ const RestaurantDetails = () => {
     return (
         <div className="container" >
 
-            <div className="row my-4" >
+            <div className="row my-4">
                 <div className="col-md-12">
                     <img
                         src={restaurant.image}
@@ -73,7 +72,11 @@ const RestaurantDetails = () => {
             <div className="col-md-8 mb-4">
                 <div className='card border-0 h-100'>
                     {meals.map((meal) => (
-                        <div className="card-body shadow d-flex align-items-center gap-3" key={meal.id} onClick={handleClick} style={{ cursor: 'pointer' }}>
+                        <div
+                            className="card-body shadow d-flex align-items-center gap-3"
+                            key={meal.id} onClick={() => handleClick(meal)}
+                            style={{ cursor: 'pointer' }}
+                        >
                             <img
                                 src={meal.image}
                                 alt={meal.name}

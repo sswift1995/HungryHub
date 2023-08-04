@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
     return (
@@ -12,29 +12,30 @@ const Footer = () => {
                     </div>
 
                     <div>
-                        <a href="" class="me-4 text-reset">
+                        <a href="" class="me-4 text-reset" aria-label="Facebook">
                             <i class="fa fa-facebook-f"></i>
                         </a>
-                        <a href="" class="me-4 text-reset">
+                        <a href="" class="me-4 text-reset" aria-label="Twitter">
                             <i class="fa fa-twitter"></i>
                         </a>
-                        <a href="" class="me-4 text-reset">
+                        <a href="" class="me-4 text-reset" aria-label="Google">
                             <i class="fa fa-google"></i>
                         </a>
-                        <a href="" class="me-4 text-reset">
+                        <a href="" class="me-4 text-reset" aria-label="Instagram">
                             <i class="fa fa-instagram"></i>
                         </a>
-                        <a href="" class="me-4 text-reset">
+                        <a href="" class="me-4 text-reset" aria-label="LinkedIn">
                             <i class="fa fa-linkedin"></i>
                         </a>
                     </div>
+
                 </section>
                 <section class="">
                     <div class="container text-center text-md-start mt-5">
                         <div class="row mt-3">
                             <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                                 <h6 class="text-uppercase fw-bold mb-4">
-                                   Hungry Hub
+                                    Hungry Hub
                                 </h6>
                                 <p>
                                     Here you can use rows and columns to organize your footer content. Lorem ipsum
