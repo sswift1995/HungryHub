@@ -57,7 +57,7 @@ export default function CustomNavbar({ signOut }) {
             </OverlayTrigger>
 
             <button
-                className="btn btn-outline-dark"
+                className="btn btn-danger"
                 onClick={signOut}
             >
                 Sign Out
@@ -72,4 +72,4 @@ export default function CustomNavbar({ signOut }) {
                 </Container>
             </Navbar>
         </div>
-}
+)}
