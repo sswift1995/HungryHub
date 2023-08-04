@@ -78,7 +78,7 @@ export default function Item({ cartItemsCount, setCartItemsCount }) {
                 <button onClick={handlePlusClick}>+</button>
                 <p>{quantity}</p>
                 <button onClick={handleMinusClick}>-</button>
-                <button onClick={() => addToCart()}>Order ${calculatePrice()}</button> {/* Call the function */}
+                <button onClick={() => addToCart()}>Add to Cart ${calculatePrice()}</button> {/* Call the function */}
             </div>
         </div>
     );
