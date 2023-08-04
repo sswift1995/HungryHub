@@ -75,10 +75,10 @@ export default function Item({ cartItemsCount, setCartItemsCount }) {
                         <p className="card-text fs-5 fw-bold text-success">{meal.price}</p>
                     </div>
                 </div>
-                <button onClick={handlePlusClick}>+</button>
-                <p>{quantity}</p>
-                <button onClick={handleMinusClick}>-</button>
-                <button onClick={() => addToCart()}>Order ${calculatePrice()}</button> {/* Call the function */}
+                <p class="h5">Qty {quantity}</p>
+                <button onClick={handlePlusClick} class="btn btn-outline-danger" style={{ fontSize: '20px',  width: '150px', marginTop: '10px' }}>+</button>
+                <button onClick={handleMinusClick} class="btn btn-outline-danger" style={{ fontSize: '20px',  width: '150px', marginTop: "10px"} }>-</button>
+                <button onClick={() => addToCart()} class="btn btn-outline-danger" style={{ fontSize: '20px',  width: '150px', marginTop: "10px" }}> ${calculatePrice()} <br></br>Add to Order</button> {/* Call the function */}
             </div>
         </div>
     );

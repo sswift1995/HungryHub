@@ -69,7 +69,7 @@ const RestaurantDetails = () => {
 
 
 
-            <div className="col-md-8 mb-4">
+            <div className="col-md-12 mb-4">
                 <div className='card border-0 h-100'>
                     {meals.map((meal) => (
                         <div
