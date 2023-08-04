@@ -38,7 +38,7 @@ const RestaurantDetails = () => {
     console.log(restaurant)
 
     return (
-        <div className="container">
+        <div className="container" >
 
             <div className="row my-4">
                 <div className="col-md-12">
@@ -46,11 +46,11 @@ const RestaurantDetails = () => {
                         src={restaurant.image}
                         alt={restaurant.name}
                         className="img-fluid rounded"
-                        style={{ width: '100%' }}
+                        style={{ width: '55%' }}
                     />
                 </div>
-                <div className="col-md-6" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <div>
+                <div className="col-md-6" style={{ display: 'flex', justifyContent: 'left', alignItems: 'center' }}>
+                    <div className="mr-2">
                         <p className="name fw-bold mb-0" style={{ fontSize: '24px', color: '#333' }}>
                             {restaurant.name}
                         </p>
@@ -64,11 +64,12 @@ const RestaurantDetails = () => {
                         </p>
                     </div>
                 </div>
+
             </div>
 
 
 
-            <div className="col-md-12 mb-4">
+            <div className="col-md-8 mb-4">
                 <div className='card border-0 h-100'>
                     {meals.map((meal) => (
                         <div

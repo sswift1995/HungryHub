@@ -2,11 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import RestaurantItem from '../../components/RestaurantItem/index';
+
 import { DataStore } from 'aws-amplify';
 import {Restaurant} from '../../models';
 import {useAuthContext} from '../../contexts/AuthContext';
 import {User} from '../../models';
-
 
 function HomeScreen() {
   const [restaurants, setRestaurants] = useState([])
