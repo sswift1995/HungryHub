@@ -38,8 +38,7 @@ const Footer = () => {
                                     Hungry Hub
                                 </h6>
                                 <p>
-                                    Here you can use rows and columns to organize your footer content. Lorem ipsum
-                                    dolor sit amet, consectetur adipisicing elit.
+                                    Disclaimer: This application is for demonstration purposes only and does not facilitate real transactions. Orders submitted through this app will not be processed, and payments will not be accepted. The content and functionality showcased within this app are simulated and should not be considered as representative of actual business operations.
                                 </p>
                             </div>
                             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
@@ -89,10 +88,18 @@ const Footer = () => {
                         </div>
                     </div>
                 </section>
-                <div class="text-center p-4" style={{ background: 'rgba(0, 0, 0, 0.05)' }}>
-                    © 2023 Copyright:
-                    <a class="text-reset fw-bold" href="https://mdbootstrap.com/">HUNGRYHUB.COM</a>
+                <div className="text-center p-4" style={{ background: 'rgba(0, 0, 0, 0.05)' }}>
+                    © 2023 COPYRIGHT:
+                    <a
+                        className="text-reset fw-bold"
+                        href="https://mdbootstrap.com/"
+                        style={{ marginLeft: '20px' }}
+                    >
+                        HUNGRYHUB.COM
+                    </a>
                 </div>
+
+
             </footer>
 
         </>
