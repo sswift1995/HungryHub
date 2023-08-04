@@ -2,13 +2,13 @@ import React from 'react';
 import { useCartContext } from '../contexts/CartContext';
 
 const Cart = () => {
-  const { cartItems, removeFromCart } = useCartContext();
-
-  const handleDeleteItem = (index) => {
+    const { cartItems } = useCartContext();
+  
+    const handleDeleteItem = (index) => {
     removeFromCart(index);
   };
 
-  return (
+    return (
     <div className="container">
       <div className="row">
         <div className="col-md-4">
@@ -25,9 +25,7 @@ const Cart = () => {
           <button className="btn btn-outline-danger" style={{ fontSize: '20px', width: '180px', margin: '10px' }}>Add Items</button>
           <button className="btn btn-outline-danger" style={{ fontSize: '20px', width: '180px', margin: '10px' }}>Place Order</button>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Cart;

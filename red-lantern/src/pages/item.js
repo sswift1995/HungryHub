@@ -77,9 +77,9 @@ export default function Item({ cartItemsCount, setCartItemsCount }) {
                 </div>
 
                 <p class="h5">Qty {quantity}</p>
-                <button onClick={handlePlusClick} class="btn btn-outline-danger" style={{ fontSize: '20px',  width: '150px', marginTop: '10px' }}>+</button>
-                <button onClick={handleMinusClick} class="btn btn-outline-danger" style={{ fontSize: '20px',  width: '150px', marginTop: "10px"} }>-</button>
-                <button onClick={() => addToCart()} class="btn btn-outline-danger" style={{ fontSize: '20px',  width: '150px', marginTop: "10px" }}> ${calculatePrice()} <br></br>Add to Order</button> {/* Call the function */}
+                <button onClick={handlePlusClick} class="btn btn-outline-danger" style={{ fontSize: '20px', width: '150px', marginTop: '10px' }}>+</button>
+                <button onClick={handleMinusClick} class="btn btn-outline-danger" style={{ fontSize: '20px', width: '150px', marginTop: "10px" }}>-</button>
+                <button onClick={() => addToCart()} class="btn btn-outline-danger" style={{ fontSize: '20px', width: '150px', marginTop: "10px" }}> ${calculatePrice().toFixed(2)} <br></br>Add to Order</button> {/* Call the function */}
 
             </div>
         </div>
