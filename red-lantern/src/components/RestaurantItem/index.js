@@ -1,10 +1,7 @@
 import React from 'react';
-import { Card, Button } from 'react-bootstrap';
-
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const RestaurantItem = ({ restaurant }) => {
     const navigation = useNavigate();

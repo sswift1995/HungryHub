@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Form, Nav, Navbar, OverlayTrigger, Popover, Button } from 'react-bootstrap';
 import logo from '../assets/logo.png';
-import CartContext, { useCartContext } from '../contexts/CartContext';
+import { useCartContext } from '../contexts/CartContext';
 import { useNavigate } from 'react-router-dom';
 
 export default function CustomNavbar({ signOut }) {
@@ -9,12 +9,12 @@ export default function CustomNavbar({ signOut }) {
 
   const navigation = useNavigate();
 
+  // Cart button logic
   const toCart = () => {
     navigation('/cart');
   };
 
-  const cartItemsCount = cartItems.reduce((total, item) => total + item.quantity, 0);
-
+  // Calculate the price of all items
   const totalPrice = cartItems.reduce((total, item) => total + item.meal.price * item.quantity, 0);
 
   return (

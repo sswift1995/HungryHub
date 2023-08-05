@@ -1,16 +1,13 @@
-//home screen -- add styling and see a list of default list of restaurants.  Add a few random restaurants to a database rather than a full API
-
 import React, { useState, useEffect } from 'react';
 import RestaurantItem from '../../components/RestaurantItem/index';
 
 import { DataStore } from 'aws-amplify';
-import {Restaurant} from '../../models';
-import {useAuthContext} from '../../contexts/AuthContext';
-import {User} from '../../models';
+import { Restaurant } from '../../models';
 
 function HomeScreen() {
   const [restaurants, setRestaurants] = useState([])
 
+  // Fetch all the restaurants
   useEffect(() => {
     DataStore.query(Restaurant)
       .then(setRestaurants)
