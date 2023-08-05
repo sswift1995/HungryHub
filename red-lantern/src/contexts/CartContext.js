@@ -23,8 +23,16 @@ export const CartProvider = ({ children }) => {
         localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartItems));
     }, [cartItems]);
 
+    const removeFromCart = (index) => {
+        setCartItems((prevCartItems) => {
+            const updatedCartItems = [...prevCartItems];
+            updatedCartItems.splice(index, 1);
+            return updatedCartItems;
+        });
+    };
+
     return (
-        <CartContext.Provider value={{ cartItems, addMealToCart }}>
+        <CartContext.Provider value={{ cartItems, addMealToCart, removeFromCart }}>
             {children}
         </CartContext.Provider>
     );
