@@ -23,12 +23,14 @@ function App() {
   const [totalPrice, setTotalPrice] = useState(0)
   const { dbUser } = useAuthContext();
 
+  // Sign out
   const handleSignOut = () => {
     Auth.signOut()
       .then(() => console.log('Successfully signed out'))
       .catch((err) => console.log('Error signing out:', err));
   };
 
+  // TODO:
   const components = {
     Header() {
       const { tokens } = useTheme();
@@ -66,7 +68,7 @@ function App() {
               />
               <Routes>
                 <Route path="/" element={<HomeScreen />} />
-                <Route path="/restaurants/:id" element={<RestaurantDetails />} />
+                <Route path="/restaurants/:id" element={<RestaurantDetails cartItemsCount={cartItemsCount} setCartItemsCount={setCartItemsCount} />} />
                 <Route path="/restaurants/:id/item/:mealId" element={<Item cartItemsCount={cartItemsCount} setCartItemsCount={setCartItemsCount} />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
