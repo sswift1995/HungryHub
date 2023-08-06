@@ -24,4 +24,37 @@
  align-items: auto ; /* Adjust the right margin to control spacing between icons */
 }
 
-/* Display the icons as inline elements */
+
+.notification-count:hover,
+.notification-count:active {
+  color: white; /* Change the text color to white on hover and click */
+  /* Add any other styles you want for the hover and active states */
+}
+.notification-btn {
+  margin-right: 100px; /* Change the right margin as needed */
+}
+
+.sign-out-btn {
+  margin-left: 10px; /* Change the left margin as needed */
+}
+/* Navbar.css */
+
+/* Add styles for the alert button */
+.alert-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid red; /* Updated border-width to 1px */
+  color: red;
+  font-size: 1.2rem;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+/* Add hover effect for the alert button */
+.alert-btn:hover {
+  background-color: red;
+  color: white;
+}
