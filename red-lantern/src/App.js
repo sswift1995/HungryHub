@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Amplify, Auth } from 'aws-amplify';
 import { View, Image, useTheme, Text, Authenticator } from '@aws-amplify/ui-react';
 import awsExports from './aws-exports';
@@ -22,7 +22,7 @@ Amplify.configure(awsExports);
 
 function App() {
   const [cartItemsCount, setCartItemsCount] = useState(0);
-  const [totalPrice, setTotalPrice] = useState(0)
+  const [totalPrice, setTotalPrice] = useState(0);
   const { dbUser } = useAuthContext();
 
   // Sign out
@@ -85,7 +85,6 @@ function App() {
       </Authenticator>
       <Footer />
     </CartProvider>
-
   );
 }
 
