@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useCartContext } from '../contexts/CartContext';
 import { useNavigate } from 'react-router-dom';
+import { useTotalPriceContext } from '../contexts/TotalPriceContext';
 
 const Cart = () => {
-    const { cartItems, removeFromCart } = useCartContext();
-    const [totalPrice, setTotalPrice] = useState(0);
+    const { cartItems, removeFromCart, resetCartItems } = useCartContext();
+    const { totalPrice, resetTotalPrice } = useTotalPriceContext();
     const [orderPrice, setOrderPrice] = useState(0)
     const [restaurantName, setRestaurantName] = useState('');
     const navigation = useNavigate();
@@ -33,10 +34,13 @@ const Cart = () => {
                 totalPrice,
             };
 
-            console.log(orderDetails)
+            // Reset the totalPrice to 0 when the order has been placed
+            resetTotalPrice();
 
             // Use the navigate function with the state object
             navigation('/order-details', { state: orderDetails });
+
+            resetCartItems();
         }
     };
 
@@ -44,7 +48,7 @@ const Cart = () => {
     useEffect(() => {
         // Calculate total price
         const newTotalPrice = cartItems.reduce((total, item) => total + item.meal.price * item.quantity, 0);
-        setTotalPrice(newTotalPrice);
+        setOrderPrice(newTotalPrice);
 
         // Calculate order price
         if (cartItems.length > 0) {
@@ -57,7 +61,7 @@ const Cart = () => {
             setOrderPrice(0);
             setRestaurantName('');
         }
-    }, [cartItems]);
+    }, [cartItems, totalPrice]);
 
     return (
         <div className="container">
@@ -89,20 +93,20 @@ const Cart = () => {
                     )}
                     <br></br>
                     {/* Total Items */}
-                    <p>Subtotal: ${totalPrice.toFixed(2)}</p>
+                    <b><p>${orderPrice.toFixed(2)}</p></b>
 
                     {/* Delivery Fee */}
                     {cartItems.length > 0 && (
-                        <p>Delivery Fee: ${cartItems[0].restaurant.deliveryFee.toFixed(2)}</p>
+                        <p>Delivery Fee: ${cartItems[0].restaurant.deliveryFee}</p>
                     )}
 
                     {/* Delivery Time */}
                     {cartItems.length > 0 && (
-                        <p>Est. Delivery: {cartItems[0].restaurant.minDeliveryTime} - {cartItems[0].restaurant.maxDeliveryTime} minutes</p>
+                        <p>{cartItems[0].restaurant.minDeliveryTime} - {cartItems[0].restaurant.maxDeliveryTime} minutes</p>
                     )}
 
                     {/* Order Price */}
-                    <b><p><u>Order Total: ${orderPrice.toFixed(2)}</u></p></b>
+                    <p>Total: <b>${orderPrice.toFixed(2)}</b></p>
 
                     {/* If there isn't anything in our cart, -> restaurant, else -> HomeScreen */}
                     <button

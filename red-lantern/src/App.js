@@ -17,14 +17,13 @@ import Footer from './components/Footer';
 import OrderDetails from './pages/OrderDetails';
 import { useAuthContext } from './contexts/AuthContext';
 import { CartProvider } from './contexts/CartContext';
+import { TotalPriceProvider } from './contexts/TotalPriceContext';
 import OrderDelivered from './pages/OrderDelivered';
 
 Amplify.configure(awsExports);
 
 function App() {
   const [cartItemsCount, setCartItemsCount] = useState(0);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const { dbUser } = useAuthContext();
 
   // Sign out
   const handleSignOut = () => {
@@ -58,34 +57,35 @@ function App() {
   };
 
   return (
-    <CartProvider>
-      <Authenticator loginMechanisms={['email']} components={components}>
-        {({ signOut, user }) => (
-          <div>
-            <Router>
-              <CustomNavbar
-                signOut={handleSignOut}
-                setCartItems={setCartItemsCount}
-                cartItems={cartItemsCount}
-                totalPrice={totalPrice}
-              />
-              <Routes>
-                <Route path="/" element={<HomeScreen />} />
-                <Route path="/restaurants/:id" element={<RestaurantDetails cartItemsCount={cartItemsCount} setCartItemsCount={setCartItemsCount} />} />
-                <Route path="/restaurants/:id/item/:mealId" element={<Item cartItemsCount={cartItemsCount} setCartItemsCount={setCartItemsCount} />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/register" element={<RegisterPage />} />
-                <Route path='/order-details' element={<OrderDetails />} />
-                <Route path='/delivered' element={<OrderDelivered />} />
-                <Route path='/cart' element={<Cart totalPrice={totalPrice} cartItemsCount={cartItemsCount} />} />
-                <Route path='/profile' element={<ProfileScreen />} />
-              </Routes>
-            </Router>
-          </div>
-        )}
-      </Authenticator>
-      <Footer />
-    </CartProvider>
+    <TotalPriceProvider>
+      <CartProvider>
+        <Authenticator loginMechanisms={['email']} components={components}>
+          {({ signOut, user }) => (
+            <div>
+              <Router>
+                <CustomNavbar
+                  signOut={handleSignOut}
+                  setCartItems={setCartItemsCount}
+                  cartItems={cartItemsCount}
+                />
+                <Routes>
+                  <Route path="/" element={<HomeScreen />} />
+                  <Route path="/restaurants/:id" element={<RestaurantDetails cartItemsCount={cartItemsCount} setCartItemsCount={setCartItemsCount} />} />
+                  <Route path="/restaurants/:id/item/:mealId" element={<Item cartItemsCount={cartItemsCount} setCartItemsCount={setCartItemsCount} />} />
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/register" element={<RegisterPage />} />
+                  <Route path='/order-details' element={<OrderDetails />} />
+                  <Route path='/delivered' element={<OrderDelivered />} />
+                  <Route path='/cart' element={<Cart cartItemsCount={cartItemsCount} setCartItemsCount={setCartItemsCount} />} />
+                  <Route path='/profile' element={<ProfileScreen />} />
+                </Routes>
+              </Router>
+            </div>
+          )}
+        </Authenticator>
+        <Footer />
+      </CartProvider>
+    </TotalPriceProvider>
   );
 }
 
