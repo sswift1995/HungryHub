@@ -13,6 +13,8 @@ export const CartProvider = ({ children }) => {
         return storedCartItems ? JSON.parse(storedCartItems) : [];
     });
 
+    console.log('CartProvider cartItems:', cartItems);
+
     // Add an item to the cart
     const addMealToCart = async (mealId, quantity) => {
         try {
