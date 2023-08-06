@@ -65,26 +65,33 @@ const Cart = () => {
 
     return (
         <div className="container">
-            <div className="row">
-                <div className="col-md-4">
-                    <h1>Order Summary</h1>
+            <div className="row" >
+                <div className="col-md-4" >
+                    <br></br>
+                    <h2>Order Summary</h2>
+                    <br></br>
+                    {/* Restaurant Name */}
+                    {restaurantName && <b><h5><u>{restaurantName}</u></h5></b>}
 
-                    {restaurantName && <b><p>{restaurantName}</p></b>}
-
-                    <ul className="list-group">
-                        {cartItems.map((item, index) => (
-                            <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-                                <p><b>{item.quantity} {item.meal.name}</b> ${item.meal.price}</p>
-                                <button
-                                    className="btn btn-outline-secondary"
-                                    onClick={() => removeFromCart(index)}
-                                >
-                                    Delete
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-
+                    <br></br>
+                    {cartItems.length === 0 ? (
+                        <p>Your cart is empty. Add items to start a cart. </p>
+                    ) : (
+                        <ul className="list-group">
+                            {cartItems.map((item, index) => (
+                                <li key={index} className="border-bottom my-4 d-flex justify-content-between align-items-center">
+                                    <p><b>{item.quantity} {item.meal.name}</b> ${item.meal.price}</p>
+                                    <button
+                                        className="btn btn"
+                                        onClick={() => removeFromCart(index)}
+                                    >
+                                        🗑️
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                    <br></br>
                     {/* Total Items */}
                     <b><p>${orderPrice.toFixed(2)}</p></b>
 
@@ -104,7 +111,7 @@ const Cart = () => {
                     {/* If there isn't anything in our cart, -> restaurant, else -> HomeScreen */}
                     <button
                         className="btn btn-outline-danger"
-                        style={{ fontSize: '20px', width: '180px', margin: '10px' }}
+                        style={{ fontSize: '20px', width: '150px', margin: '10px' }}
                         onClick={handleAddItems}
                     >
                         Add Items
@@ -113,14 +120,16 @@ const Cart = () => {
                     {/* TODO: Place order button that goes to OrderDetails (?) page for delivery */}
                     <button
                         className="btn btn-outline-danger"
-                        style={{ fontSize: '20px', width: '180px', margin: '10px' }}
+                        style={{ fontSize: '20px', width: '150px', margin: '10px' }}
                         onClick={handlePlaceOrder}
                     >
-                        Place Order (${orderPrice.toFixed(2)})
+                        Place Order
                     </button>
                 </div>
             </div>
+            <br />
         </div>
+
     );
 };
 
