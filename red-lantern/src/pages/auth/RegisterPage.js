@@ -3,11 +3,9 @@ import { useNavigate, Link } from 'react-router-dom';
 
 import { Auth } from 'aws-amplify';
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+
+
 
 function RegisterPage() {
     const navigate = useNavigate()

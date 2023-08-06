@@ -47,7 +47,7 @@ function App() {
       return (
         <View textAlign="center" padding={tokens.space.large}>
           <Text color={tokens.colors.neutral[80]}>
-            &copy; 2022 Jeremy Lehmann, Jeffrey Smith, Jasmina Topalovic, Syrinthia Swift, Aphra
+            &copy; 2023 Aphra Hiat, Jeremy Lehmann, Jeffrey Smith, <br></br>Syrinthia Swift, Jasmina Topalovic
           </Text>
         </View>
       );
