@@ -61,42 +61,44 @@ const Cart = () => {
 
     return (
         <div className="container">
-            <div className="row">
-                <div className="col-md-4">
+            <div className="row" >
+                <div className="col-md-4" >
+                    <br></br>
                     <h1>Order Summary</h1>
-
+                    <br></br>
                     {/* Restaurant Name */}
-                    {restaurantName && <b><p>{restaurantName}</p></b>}
-
+                    {restaurantName && <b><h5><u>{restaurantName}</u></h5></b>}
+                    
+                    <br></br>
                     <ul className="list-group">
                         {cartItems.map((item, index) => (
-                            <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
+                            <li key={index} className="border-bottom my-4 d-flex justify-content-between align-items-center">
                                 <p><b>{item.quantity} {item.meal.name}</b> ${item.meal.price}</p>
                                 <button
-                                    className="btn btn-outline-secondary"
+                                    className="btn btn"
                                     onClick={() => removeFromCart(index)}
                                 >
-                                    Delete
+                                   🗑️
                                 </button>
                             </li>
                         ))}
                     </ul>
-
+                    <br></br>
                     {/* Total Items */}
-                    <b><p>${totalPrice.toFixed(2)}</p></b>
+                    <p>Subtotal: ${totalPrice.toFixed(2)}</p>
 
                     {/* Delivery Fee */}
                     {cartItems.length > 0 && (
-                        <p>Delivery Fee: ${cartItems[0].restaurant.deliveryFee}</p>
+                        <p>Delivery Fee: ${cartItems[0].restaurant.deliveryFee.toFixed(2)}</p>
                     )}
 
                     {/* Delivery Time */}
                     {cartItems.length > 0 && (
-                        <p>{cartItems[0].restaurant.minDeliveryTime} - {cartItems[0].restaurant.maxDeliveryTime} minutes</p>
+                        <p>Est. Delivery: {cartItems[0].restaurant.minDeliveryTime} - {cartItems[0].restaurant.maxDeliveryTime} minutes</p>
                     )}
 
                     {/* Order Price */}
-                    <p>Total: <b>${orderPrice.toFixed(2)}</b></p>
+                    <b><p><u>Order Total: ${orderPrice.toFixed(2)}</u></p></b>
 
                     {/* If there isn't anything in our cart, -> restaurant, else -> HomeScreen */}
                     <button
@@ -113,9 +115,11 @@ const Cart = () => {
                         style={{ fontSize: '20px', width: '180px', margin: '10px' }}
                         onClick={handlePlaceOrder}
                     >
-                        Place Order (${orderPrice.toFixed(2)})
-                    </button>
+                        Place Order 
+                     </button>
+                     
                 </div>
+                
             </div>
         </div>
     );

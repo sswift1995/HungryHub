@@ -3,11 +3,9 @@ import { useNavigate, Link } from 'react-router-dom';
 
 import { Auth } from 'aws-amplify';
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+
+
 
 function ValidatePage() {
     const navigate = useNavigate()
@@ -46,12 +44,12 @@ function ValidatePage() {
                                 onChange={evt => setAuthenticationCode(evt.target.value)} />
                         </Form.Group>
 
-                        <Button variant="primary" type="button"
+                        <Button variant="destructive" type="button"
                             onClick={handleRegisterConfirmation}>Validate &gt;&gt;</Button>
                         &nbsp;&nbsp;
                         <Link
                             to='/'>
-                            <Button variant="outline-primary">Cancel</Button>
+                            <Button variant="destructive">Cancel</Button>
                         </Link>
                     </Form>
                 </Col>
