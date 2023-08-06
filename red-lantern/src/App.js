@@ -4,6 +4,7 @@ import { Amplify, Auth } from 'aws-amplify';
 import { View, Image, useTheme, Text, Authenticator } from '@aws-amplify/ui-react';
 import awsExports from './aws-exports';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import logo from './assets/logo.png';
 import HomeScreen from './pages/HomeScreen';
 import CustomNavbar from './components/Navbar';
 import LoginPage from './pages/auth/LoginPage';
@@ -39,7 +40,7 @@ function App() {
 
       return (
         <View textAlign="center" padding={tokens.space.large}>
-          <Image alt="Contacts App" src="/img/logo.png" />
+          <Image alt='hungryHub logo' src={logo} />
         </View>
       );
     },

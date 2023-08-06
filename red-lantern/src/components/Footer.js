@@ -92,7 +92,7 @@ const Footer = () => {
                     <a
                         className="text-reset fw-bold"
                         href="https://mdbootstrap.com/"
-                        style={{ marginLeft: '20px' }}
+                        style={{ marginLeft: '5px' }}
                     >
                         HUNGRYHUB.COM
                     </a>

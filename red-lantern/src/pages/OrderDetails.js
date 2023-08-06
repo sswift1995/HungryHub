@@ -45,22 +45,31 @@ const OrderDetails = () => {
     }
 
     return (
-        <div>
-            <h2>Order Details</h2>
-            {cartItems[0]?.restaurant?.name && <h1>{cartItems[0].restaurant.name}</h1>}
-            <ul>
-                {cartItems.map((item, index) => (
-                    <li key={index}>
-                        <p>{item.meal.name}, ${item.meal.price}</p>
-                    </li>
-                ))}
-            </ul>
-            <p>Subtotal: ${orderDetails.totalPrice.toFixed(2)}</p>
-            <p>Delivery Fee: ${orderDetails.deliveryFee}</p>
-            <p>Total: <b>${orderPrice.toFixed(2)}</b></p>
-            <br />
-            <br />
-            <h2>Your food is on the way!</h2>
+        <div className="container">
+            <div className="row" >
+                <div className="col-md-6" >
+                    <br></br>
+                    <h2>Your food is on the way!</h2>
+                    <br />
+                    <h4>Receipt</h4>
+                    <br />
+                    {cartItems[0]?.restaurant?.name && <b><h5><u>{cartItems[0].restaurant.name}</u></h5></b>}
+                    <br></br>
+                    <ul className="list-group">
+                        {cartItems.map((item, index) => (
+                            <li key={index} className="border-bottom my-4 d-flex justify-content-between align-items-center">
+                                <p><b>{item.quantity} {item.meal.name}</b> ${item.meal.price}</p>
+                            </li>
+                        ))}
+                    </ul>
+                    <br></br>
+                    <p>Subtotal: ${orderDetails.totalPrice.toFixed(2)}</p>
+                    <p>Delivery Fee: ${orderDetails.deliveryFee.toFixed(2)}</p>
+                    <b><p><u>Order Total: ${orderPrice.toFixed(2)}</u></p></b>
+                    <br />
+                    
+                </div>
+            </div>
         </div>
     );
 };
