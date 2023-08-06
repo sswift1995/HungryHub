@@ -4,6 +4,7 @@ import logo from "../assets/logo.png";
 import { useCartContext } from "../contexts/CartContext";
 import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
+
 export default function CustomNavbar({ signOut }) {
   const { cartItems } = useCartContext();
   const [navbarColor, setNavbarColor] = useState("bg-light");
