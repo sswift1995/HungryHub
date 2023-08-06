@@ -1,0 +1,27 @@
+/* Styles for .btn-custom */
+.btn-custom {
+  
+  color: red;
+  transition: color 0.3s;
+}
+
+/* Hover effect for .btn-custom */
+.btn-custom:hover {
+  color: white;
+}
+
+/* Add any additional styles for the Navbar component if needed */
+/* For example, if you want to set the background color of the Navbar */
+.custom-navbar {
+  background-color: #f8f9fa; /* Example background color */
+}
+.bi-bell {
+  margin-right: 10px; /* Adjust the right margin to control spacing between icons */
+}
+
+/* Move the cart icon closer and to the right */
+.bi-cart {
+ align-items: auto ; /* Adjust the right margin to control spacing between icons */
+}
+
+/* Display the icons as inline elements */
