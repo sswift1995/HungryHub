@@ -38,7 +38,7 @@ const Cart = () => {
             resetTotalPrice();
 
             // Use the navigate function with the state object
-            navigation('/order-details', { state: orderDetails });
+            navigation('/order-details', { state: { ...orderDetails, cartItems } });
 
             resetCartItems();
         }
@@ -93,21 +93,17 @@ const Cart = () => {
                     )}
                     <br></br>
                     {/* Total Items */}
-                    <b><p>${orderPrice.toFixed(2)}</p></b>
-
+                    <b><p>Subtotal: ${orderPrice.toFixed(2)}</p></b>
                     {/* Delivery Fee */}
                     {cartItems.length > 0 && (
-                        <p>Delivery Fee: ${cartItems[0].restaurant.deliveryFee}</p>
+                        <p>Delivery Fee: ${cartItems[0].restaurant.deliveryFee.toFixed(2)}</p>
                     )}
-
                     {/* Delivery Time */}
                     {cartItems.length > 0 && (
-                        <p>{cartItems[0].restaurant.minDeliveryTime} - {cartItems[0].restaurant.maxDeliveryTime} minutes</p>
+                        <p>Est. Delivery: {cartItems[0].restaurant.minDeliveryTime} - {cartItems[0].restaurant.maxDeliveryTime} minutes</p>
                     )}
-
                     {/* Order Price */}
-                    <p>Total: <b>${orderPrice.toFixed(2)}</b></p>
-
+                    <p><b><u>Total: ${orderPrice.toFixed(2)}</u></b></p>
                     {/* If there isn't anything in our cart, -> restaurant, else -> HomeScreen */}
                     <button
                         className="btn btn-outline-danger"
@@ -116,7 +112,6 @@ const Cart = () => {
                     >
                         Add Items
                     </button>
-
                     {/* TODO: Place order button that goes to OrderDetails (?) page for delivery */}
                     <button
                         className="btn btn-outline-danger"

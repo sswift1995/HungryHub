@@ -15,7 +15,6 @@ import ProfileScreen from './pages/profileScreen';
 import Cart from './pages/cart';
 import Footer from './components/Footer';
 import OrderDetails from './pages/OrderDetails';
-import { useAuthContext } from './contexts/AuthContext';
 import { CartProvider } from './contexts/CartContext';
 import { TotalPriceProvider } from './contexts/TotalPriceContext';
 import OrderDelivered from './pages/OrderDelivered';
@@ -74,7 +73,7 @@ function App() {
                   <Route path="/restaurants/:id/item/:mealId" element={<Item cartItemsCount={cartItemsCount} setCartItemsCount={setCartItemsCount} />} />
                   <Route path="/login" element={<LoginPage />} />
                   <Route path="/register" element={<RegisterPage />} />
-                  <Route path='/order-details' element={<OrderDetails />} />
+                  <Route path='/order-details' element={<OrderDetails cartItemsCount={cartItemsCount} />} />
                   <Route path='/delivered' element={<OrderDelivered />} />
                   <Route path='/cart' element={<Cart cartItemsCount={cartItemsCount} setCartItemsCount={setCartItemsCount} />} />
                   <Route path='/profile' element={<ProfileScreen />} />

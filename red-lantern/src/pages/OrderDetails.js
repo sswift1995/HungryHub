@@ -1,20 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useCartContext } from '../contexts/CartContext';
 
-const OrderDetails = () => {
+const OrderDetails = ({ cartItemsCount }) => {
     const location = useLocation();
     const navigation = useNavigate();
-    const { cartItems } = useCartContext();
     const orderDetails = location.state; // Access the state object from location
-
-    // Calculate the subtotal based on the items in orderDetails.cartItems
-    const subtotal = orderDetails.cartItems.reduce(
-        (total, item) => total + item.meal.price * item.quantity,
-        0
-    );
-
-    const orderPrice = subtotal + orderDetails.deliveryFee;
 
     const [orderDelivered, setOrderDelivered] = useState(false);
 
@@ -39,35 +29,63 @@ const OrderDetails = () => {
         }
     }, [orderDelivered, navigation]);
 
-    // Check if orderDetails exists and has cartItems before proceeding
-    if (!orderDetails || !orderDetails.cartItems || orderDetails.cartItems.length === 0) {
-        return <p>No order details found. Please go back to the cart and place an order.</p>;
-    }
+    // Calculate the order subtotal and total
+    const subtotal = orderDetails.cartItems.reduce(
+        (total, item) => total + item.meal.price * item.quantity,
+        0
+    );
+
+    const orderPrice = subtotal + orderDetails.deliveryFee;
+
+    console.log('cartItems:', orderDetails.cartItems); // Check if cartItems are being passed correctly
+    console.log('orderDetails:', orderDetails); // Check the orderDetails received from the previous page
 
     return (
         <div className="container">
-            <div className="row" >
-                <div className="col-md-6" >
-                    <br></br>
+            <div className="row">
+                <div className="col-md-6">
+                    <br />
                     <h2>Your food is on the way!</h2>
                     <br />
                     <h4>Receipt</h4>
                     <br />
-                    {cartItems[0]?.restaurant?.name && <b><h5><u>{cartItems[0].restaurant.name}</u></h5></b>}
-                    <br></br>
-                    <ul className="list-group">
-                        {cartItems.map((item, index) => (
-                            <li key={index} className="border-bottom my-4 d-flex justify-content-between align-items-center">
-                                <p><b>{item.quantity} {item.meal.name}</b> ${item.meal.price}</p>
-                            </li>
-                        ))}
-                    </ul>
-                    <br></br>
+                    {/* Restaurant Name */}
+                    {orderDetails.cartItems[0]?.restaurant?.name && (
+                        <b>
+                            <h5>
+                                <u>{orderDetails.cartItems[0].restaurant.name}</u>
+                            </h5>
+                        </b>
+                    )}
+                    <br />
+                    {orderDetails.cartItems.length === 0 ? (
+                        <p>Your cart is empty. Add items to start a cart. </p>
+                    ) : (
+                        <ul className="list-group">
+                            {orderDetails.cartItems.map((item, index) => (
+                                <li
+                                    key={index}
+                                    className="border-bottom my-4 d-flex justify-content-between align-items-center"
+                                >
+                                    <p>
+                                        <b>
+                                            {item.quantity} {item.meal.name}
+                                        </b>{" "}
+                                        ${item.meal.price}
+                                    </p>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                    <br />
                     <p>Subtotal: ${subtotal.toFixed(2)}</p>
                     <p>Delivery Fee: ${orderDetails.deliveryFee.toFixed(2)}</p>
-                    <b><p><u>Order Total: ${orderPrice.toFixed(2)}</u></p></b>
+                    <b>
+                        <p>
+                            <u>Order Total: ${orderPrice.toFixed(2)}</u>
+                        </p>
+                    </b>
                     <br />
-                    
                 </div>
             </div>
         </div>
