@@ -19,6 +19,27 @@ const Cart = () => {
         }
     };
 
+    const handlePlaceOrder = () => {
+        if (cartItems.length > 0) {
+            localStorage.removeItem('orderDelivered');
+
+            const orderDetails = {
+                cartItems,
+                orderPrice,
+                restaurantName,
+                minDeliveryTime: cartItems[0].restaurant.minDeliveryTime,
+                maxDeliveryTime: cartItems[0].restaurant.maxDeliveryTime,
+                deliveryFee: cartItems[0].restaurant.deliveryFee,
+                totalPrice,
+            };
+
+            console.log(orderDetails)
+
+            // Use the navigate function with the state object
+            navigation('/order-details', { state: orderDetails });
+        }
+    };
+
     // totalPrice is the total of the items, orderPrice is totalPrice + deliveryFee
     useEffect(() => {
         // Calculate total price
@@ -90,6 +111,7 @@ const Cart = () => {
                     <button
                         className="btn btn-outline-danger"
                         style={{ fontSize: '20px', width: '180px', margin: '10px' }}
+                        onClick={handlePlaceOrder}
                     >
                         Place Order (${orderPrice.toFixed(2)})
                     </button>
