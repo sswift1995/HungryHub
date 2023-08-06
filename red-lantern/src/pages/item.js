@@ -105,7 +105,7 @@ export default function Item({ cartItemsCount, setCartItemsCount, restaurantId }
                 <p className="h5">Qty {quantity}</p>
                 <button onClick={handlePlusClick} className="btn btn-outline-danger" style={{ fontSize: '20px', width: '150px', marginTop: '10px' }}>+</button>
                 <button onClick={handleMinusClick} className="btn btn-outline-danger" style={{ fontSize: '20px', width: '150px', marginTop: "10px" }}>-</button>
-                <button onClick={() => addToCart()} className="btn btn-outline-danger" style={{ fontSize: '20px', width: '150px', marginTop: "10px" }}> ${calculatePrice().toFixed(2)} <br></br>Add to Order</button> {/* Call the function */}
+                <button onClick={() => addToCart()} className="btn btn-outline-danger" style={{ fontSize: '20px', width: '150px', marginTop: "10px" }}> ${calculatePrice().toFixed(2)} <br></br>Add to Cart</button> {/* Call the function */}
 
             </div>
         </div>
