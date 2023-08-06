@@ -8,40 +8,40 @@ const OrderDetails = () => {
     const { cartItems } = useCartContext();
     const orderDetails = location.state; // Access the state object from location
 
+    // Calculate the subtotal based on the items in orderDetails.cartItems
+    const subtotal = orderDetails.cartItems.reduce(
+        (total, item) => total + item.meal.price * item.quantity,
+        0
+    );
+
+    const orderPrice = subtotal + orderDetails.deliveryFee;
+
     const [orderDelivered, setOrderDelivered] = useState(false);
 
-    const orderPrice = orderDetails.totalPrice + orderDetails.deliveryFee;
+    useEffect(() => {
+        const deliveryTime = 5000; // 5 seconds delivery time
+
+        const timer = setTimeout(() => {
+            // Set the order as delivered after the specified delivery time
+            setOrderDelivered(true);
+        }, deliveryTime);
+
+        // Clean up the timer on component unmount
+        return () => {
+            clearTimeout(timer);
+        };
+    }, []);
 
     useEffect(() => {
-        // Check if the order is delivered
-        const isDelivered = localStorage.getItem('orderDelivered') === 'true';
-
-        if (!isDelivered) {
-            const deliveryTime = 5000; // 5 seconds delivery time
-            const timer = setTimeout(() => {
-                // Set the order as delivered
-                setOrderDelivered(true);
-                // Save the delivery status in localStorage
-                localStorage.setItem('orderDelivered', 'true');
-            }, deliveryTime);
-
-            // Clean up the timer on component unmount
-            return () => {
-                clearTimeout(timer);
-                // Make sure to reset the 'orderDelivered' status in localStorage when unmounting
-                localStorage.removeItem('orderDelivered');
-            };
+        // Navigate to '/delivered' when order is delivered
+        if (orderDelivered) {
+            navigation('/delivered');
         }
-    }, []);
+    }, [orderDelivered, navigation]);
 
     // Check if orderDetails exists and has cartItems before proceeding
     if (!orderDetails || !orderDetails.cartItems || orderDetails.cartItems.length === 0) {
         return <p>No order details found. Please go back to the cart and place an order.</p>;
-    }
-
-    if (orderDelivered) {
-        navigation('/delivered');
-        return null;
     }
 
     return (
@@ -55,7 +55,7 @@ const OrderDetails = () => {
                     </li>
                 ))}
             </ul>
-            <p>Subtotal: ${orderDetails.totalPrice.toFixed(2)}</p>
+            <p>Subtotal: ${subtotal.toFixed(2)}</p>
             <p>Delivery Fee: ${orderDetails.deliveryFee}</p>
             <p>Total: <b>${orderPrice.toFixed(2)}</b></p>
             <br />

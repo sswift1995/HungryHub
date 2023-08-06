@@ -1,14 +1,25 @@
-import React, { useState } from "react";
-import {Container,Form,Nav,Navbar,OverlayTrigger,Popover,Card,Button,} from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Container, Form, Nav, Navbar, Card, Button } from "react-bootstrap";
 import logo from "../assets/logo.png";
-import CartContext, { useCartContext } from "../contexts/CartContext";
+import { useCartContext } from "../contexts/CartContext";
 import { useNavigate } from "react-router-dom";
-import './Navbar.css' // Assuming the CSS file is in the same directory
+import { useTotalPriceContext } from "../contexts/TotalPriceContext";
+import './Navbar.css'; // Assuming the CSS file is in the same directory
 
 export default function CustomNavbar({ signOut }) {
   const { cartItems } = useCartContext();
-  const [navbarColor, setNavbarColor] = useState( "bg-light"); // Initialize with default white background
+  const { resetCartItems } = useCartContext();
+  const { resetTotalPrice, totalPrice, setTotalPrice } = useTotalPriceContext();
   const navigation = useNavigate();
+
+  useEffect(() => {
+    // Calculate the total price whenever cartItems change
+    const newTotalPrice = cartItems.reduce(
+      (total, item) => total + item.meal.price * item.quantity,
+      0
+    );
+    setTotalPrice(newTotalPrice);
+  }, [cartItems, setTotalPrice]);
 
   const toCart = () => {
     navigation("/cart");
@@ -19,21 +30,16 @@ export default function CustomNavbar({ signOut }) {
     0
   );
 
-  const totalPrice = cartItems.reduce(
-    (total, item) => total + item.meal.price * item.quantity,
-    0
-  );
+  return (
+    <div className={`d-flex justify-content-between align-items-center text-black p-3`}>
+      <div className="d-flex align-items-center gap-3">
+        <Nav.Link href="/">
+          <img src={logo} alt="HungryHub Logo" />
+        </Nav.Link>
+      </div>
 
-    return (
-      <div className={`d-flex justify-content-between align-items-center ${navbarColor} text-black p-3`}>
-        <div className="d-flex align-items-center gap-3">
-          <Nav.Link href="/">
-            <img src={logo} alt="HungryHub Logo" />
-          </Nav.Link>
-        </div>
-    
-    
-     
+
+
       {/*Search Engine Form Function*/}
       <Form className="d-flex">
         <Form.Control
@@ -58,41 +64,41 @@ export default function CustomNavbar({ signOut }) {
       </Form>
 
 
- {/* Alert Icon */}
+      {/* Alert Icon */}
       <Card button="type" className="btn btn-outline-danger btn-custom">
-  <Nav.Link
-    href="#action2"
-    className="alert-icon text-danger"
-  ><div className="d-flex justify-content-center align-items-center gap-3 flex-grow-1">
- 
-  
-</div>
-    
-    <span className="bi bi-bell" style={{ color: "white" }}>
-    🔔</span>
-  </Nav.Link> 
-</Card>
+        <Nav.Link
+          href="#action2"
+          className="alert-icon text-danger"
+        ><div className="d-flex justify-content-center align-items-center gap-3 flex-grow-1">
 
 
-<button
-  onClick={toCart}
-  type="button"
-  className="btn btn-outline-danger btn-custom"
->
-  <span style={{ marginRight: "5px" }}>🛒</span>
-  <span className="bi bi-cart" style={{ color: 'red' }}></span> (${totalPrice.toFixed(2)})
-</button>
+          </div>
+
+          <span className="bi bi-bell" style={{ color: "white" }}>
+            🔔</span>
+        </Nav.Link>
+      </Card>
 
 
-<button className="btn btn-outline-danger btn-custom" onClick={signOut}>
-  Sign Out
-</button>
+      <button
+        onClick={toCart}
+        type="button"
+        className="btn btn-outline-danger btn-custom"
+      >
+        <span style={{ marginRight: "5px" }}>🛒</span>
+        <span className="bi bi-cart" style={{ color: 'red' }}></span> {cartItems.length} &nbsp;(${totalPrice.toFixed(2)})
+      </button>
+
+
+      <button className="btn btn-outline-danger btn-custom" onClick={signOut}>
+        Sign Out
+      </button>
 
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container fluid>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
-            
+
           </Navbar.Collapse>
         </Container>
       </Navbar>
