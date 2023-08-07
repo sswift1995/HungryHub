@@ -70,7 +70,7 @@ function App() {
       <CartProvider>
         <Authenticator loginMechanisms={['email']} components={components}>
           {({ signOut, user }) => (
-            <div>
+            <div style={{ minHeight: '52vh', display: 'flex', flexDirection: 'column' }}>
               <Router>
                 <CustomNavbar
                   signOut={handleSignOut}
