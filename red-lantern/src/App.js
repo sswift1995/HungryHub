@@ -80,14 +80,14 @@ function App() {
                   setSearchQuery={setSearchQuery}
                 />
                 <Routes>
-                  <Route path="/" element={<HomeScreen restaurants={restaurants} searchQuery={searchQuery} />} />
+                  <Route path="/" element={<HomeScreen restaurants={restaurants} searchQuery={searchQuery} cartItemsCount={cartItemsCount} />} />
                   <Route path="/restaurants/:id" element={<RestaurantDetails cartItemsCount={cartItemsCount} setCartItemsCount={setCartItemsCount} />} />
                   <Route path="/restaurants/:id/item/:mealId" element={<Item cartItemsCount={cartItemsCount} setCartItemsCount={setCartItemsCount} />} />
                   <Route path="/login" element={<LoginPage />} />
                   <Route path="/register" element={<RegisterPage />} />
                   <Route path='/order-details' element={<OrderDetails cartItemsCount={cartItemsCount} />} />
                   <Route path='/delivered' element={<OrderDelivered />} />
-                  <Route path='/cart' element={<Cart cartItemsCount={cartItemsCount} setCartItemsCount={setCartItemsCount} />} />
+                  <Route path='/cart' element={<Cart />} />
                   <Route path='/profile' element={<ProfileScreen />} />
                 </Routes>
               </Router>
