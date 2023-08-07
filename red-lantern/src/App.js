@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Amplify, Auth } from 'aws-amplify';
 import { View, Image, useTheme, Text, Authenticator } from '@aws-amplify/ui-react';
 import awsExports from './aws-exports';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import logo from './assets/logo.png';
 import HomeScreen from './pages/HomeScreen';
 import CustomNavbar from './components/Navbar';
 import LoginPage from './pages/auth/LoginPage';
@@ -14,16 +15,24 @@ import ProfileScreen from './pages/profileScreen';
 import Cart from './pages/cart';
 import Footer from './components/Footer';
 import OrderDetails from './pages/OrderDetails';
-import { useAuthContext } from './contexts/AuthContext';
 import { CartProvider } from './contexts/CartContext';
+import { TotalPriceProvider } from './contexts/TotalPriceContext';
 import OrderDelivered from './pages/OrderDelivered';
 
+import { DataStore } from 'aws-amplify';
+import { Restaurant } from './models';
 Amplify.configure(awsExports);
 
 function App() {
   const [cartItemsCount, setCartItemsCount] = useState(0);
-  const [totalPrice, setTotalPrice] = useState(0)
-  const { dbUser } = useAuthContext();
+  const [restaurants, setRestaurants] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Fetch all the restaurants
+  useEffect(() => {
+    DataStore.query(Restaurant)
+      .then(setRestaurants);
+  }, []);
 
   // Sign out
   const handleSignOut = () => {
@@ -39,7 +48,7 @@ function App() {
 
       return (
         <View textAlign="center" padding={tokens.space.large}>
-          <Image alt="Contacts App" src="/img/logo.png" />
+          <Image alt='hungryHub logo' src={logo} />
         </View>
       );
     },
@@ -57,35 +66,37 @@ function App() {
   };
 
   return (
-    <CartProvider>
-      <Authenticator loginMechanisms={['email']} components={components}>
-        {({ signOut, user }) => (
-          <div>
-            <Router>
-              <CustomNavbar
-                signOut={handleSignOut}
-                setCartItems={setCartItemsCount}
-                cartItems={cartItemsCount}
-                totalPrice={totalPrice}
-              />
-              <Routes>
-                <Route path="/" element={<HomeScreen />} />
-                <Route path="/restaurants/:id" element={<RestaurantDetails cartItemsCount={cartItemsCount} setCartItemsCount={setCartItemsCount} />} />
-                <Route path="/restaurants/:id/item/:mealId" element={<Item cartItemsCount={cartItemsCount} setCartItemsCount={setCartItemsCount} />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/register" element={<RegisterPage />} />
-                <Route path='/order-details' element={<OrderDetails />} />
-                <Route path='/delivered' element={<OrderDelivered />} />
-                <Route path='/cart' element={<Cart totalPrice={totalPrice} cartItemsCount={cartItemsCount} />} />
-                <Route path='/profile' element={<ProfileScreen />} />
-              </Routes>
-            </Router>
-          </div>
-        )}
-      </Authenticator>
-      <Footer />
-    </CartProvider>
-
+    <TotalPriceProvider>
+      <CartProvider>
+        <Authenticator loginMechanisms={['email']} components={components}>
+          {({ signOut, user }) => (
+            <div style={{ minHeight: '52vh', display: 'flex', flexDirection: 'column' }}>
+              <Router>
+                <CustomNavbar
+                  signOut={handleSignOut}
+                  setCartItems={setCartItemsCount}
+                  cartItems={cartItemsCount}
+                  restaurants={restaurants}
+                  setSearchQuery={setSearchQuery}
+                />
+                <Routes>
+                  <Route path="/" element={<HomeScreen restaurants={restaurants} searchQuery={searchQuery} />} />
+                  <Route path="/restaurants/:id" element={<RestaurantDetails cartItemsCount={cartItemsCount} setCartItemsCount={setCartItemsCount} />} />
+                  <Route path="/restaurants/:id/item/:mealId" element={<Item cartItemsCount={cartItemsCount} setCartItemsCount={setCartItemsCount} />} />
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/register" element={<RegisterPage />} />
+                  <Route path='/order-details' element={<OrderDetails cartItemsCount={cartItemsCount} />} />
+                  <Route path='/delivered' element={<OrderDelivered />} />
+                  <Route path='/cart' element={<Cart cartItemsCount={cartItemsCount} setCartItemsCount={setCartItemsCount} />} />
+                  <Route path='/profile' element={<ProfileScreen />} />
+                </Routes>
+              </Router>
+            </div>
+          )}
+        </Authenticator>
+        <Footer />
+      </CartProvider>
+    </TotalPriceProvider>
   );
 }
 
