@@ -48,7 +48,6 @@ const Cart = () => {
     useEffect(() => {
         // Calculate total price
         const newTotalPrice = cartItems.reduce((total, item) => total + item.meal.price * item.quantity, 0);
-        setOrderPrice(newTotalPrice);
 
         // Calculate order price
         if (cartItems.length > 0) {
@@ -61,7 +60,12 @@ const Cart = () => {
             setOrderPrice(0);
             setRestaurantName('');
         }
-    }, [cartItems, totalPrice]);
+    }, [cartItems]);
+
+    const subtotal = cartItems.reduce(
+        (total, item) => total + item.meal.price * item.quantity,
+        0
+    );
 
     return (
         <div className="container">
@@ -93,18 +97,18 @@ const Cart = () => {
                     )}
                     <br></br>
                     {/* Total Items */}
-                    <b><p>Subtotal: ${orderPrice.toFixed(2)}</p></b>
-                    {/* Delivery Fee */}
+                    <b><p>Subtotal: ${subtotal.toFixed(2)}</p></b>
+
                     {cartItems.length > 0 && (
                         <p>Delivery Fee: ${cartItems[0].restaurant.deliveryFee.toFixed(2)}</p>
                     )}
-                    {/* Delivery Time */}
+
                     {cartItems.length > 0 && (
                         <p>Est. Delivery: {cartItems[0].restaurant.minDeliveryTime} - {cartItems[0].restaurant.maxDeliveryTime} minutes</p>
                     )}
-                    {/* Order Price */}
+
                     <p><b><u>Total: ${orderPrice.toFixed(2)}</u></b></p>
-                    {/* If there isn't anything in our cart, -> restaurant, else -> HomeScreen */}
+
                     <button
                         className="btn btn-outline-danger"
                         style={{ fontSize: '20px', width: '150px', margin: '10px' }}
@@ -112,7 +116,7 @@ const Cart = () => {
                     >
                         Add Items
                     </button>
-                    {/* TODO: Place order button that goes to OrderDetails (?) page for delivery */}
+
                     <button
                         className="btn btn-outline-danger"
                         style={{ fontSize: '20px', width: '150px', margin: '10px' }}
