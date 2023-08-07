@@ -3,11 +3,19 @@ import { Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const RestaurantItem = ({ restaurant }) => {
+import { useCartContext } from '../../contexts/CartContext';
+
+const RestaurantItem = ({ restaurant, cartItemsCount }) => {
     const navigation = useNavigate();
 
+    const { cartItems } = useCartContext();
+
     const handleClick = () => {
-        navigation(`/restaurants/${restaurant.id}`)
+        if (cartItems.length > 0) {
+            alert('You already have items in your cart. Complete your current order before starting a new one.')
+        } else {
+            navigation(`/restaurants/${restaurant.id}`)
+        }
     }
 
     return (

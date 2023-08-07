@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import RestaurantItem from '../../components/RestaurantItem/index';
 
-function HomeScreen({ restaurants, searchQuery }) {
+function HomeScreen({ restaurants, searchQuery, cartItemsCount }) {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ function HomeScreen({ restaurants, searchQuery }) {
         <div className="row">
           {filteredRestaurants.map((restaurant) => (
             <div key={restaurant.id} className="col-md-4 mb-4" style={{ cursor: 'pointer' }}>
-              <RestaurantItem restaurant={restaurant} />
+              <RestaurantItem restaurant={restaurant} cartItemsCount={cartItemsCount} />
             </div>
           ))}
         </div>
