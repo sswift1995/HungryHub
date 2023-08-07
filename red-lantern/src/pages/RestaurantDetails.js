@@ -3,9 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Bounce } from 'react-activity';
 import { DataStore } from "aws-amplify";
 import { Restaurant, Meal } from "../models";
-import Item from "./item";
 
-const RestaurantDetails = ({ cartItemsCount, setCartItemsCount }) => {
+const RestaurantDetails = () => {
     const { id } = useParams();
     const [restaurant, setRestaurant] = useState(null);
     const [meals, setMeals] = useState([]);
@@ -16,7 +15,7 @@ const RestaurantDetails = ({ cartItemsCount, setCartItemsCount }) => {
         navigation(`/restaurants/${restaurant.id}/item/${meal.id}`)
     }
 
-
+    // API
     useEffect(() => {
         const fetchRestaurant = async () => {
             try {

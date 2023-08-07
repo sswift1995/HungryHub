@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Amplify, Auth } from 'aws-amplify';
 import { View, Image, useTheme, Text, Authenticator } from '@aws-amplify/ui-react';
@@ -19,10 +19,20 @@ import { CartProvider } from './contexts/CartContext';
 import { TotalPriceProvider } from './contexts/TotalPriceContext';
 import OrderDelivered from './pages/OrderDelivered';
 
+import { DataStore } from 'aws-amplify';
+import { Restaurant } from './models';
 Amplify.configure(awsExports);
 
 function App() {
   const [cartItemsCount, setCartItemsCount] = useState(0);
+  const [restaurants, setRestaurants] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Fetch all the restaurants
+  useEffect(() => {
+    DataStore.query(Restaurant)
+      .then(setRestaurants);
+  }, []);
 
   // Sign out
   const handleSignOut = () => {
@@ -66,9 +76,11 @@ function App() {
                   signOut={handleSignOut}
                   setCartItems={setCartItemsCount}
                   cartItems={cartItemsCount}
+                  restaurants={restaurants}
+                  setSearchQuery={setSearchQuery}
                 />
                 <Routes>
-                  <Route path="/" element={<HomeScreen />} />
+                  <Route path="/" element={<HomeScreen restaurants={restaurants} searchQuery={searchQuery} />} />
                   <Route path="/restaurants/:id" element={<RestaurantDetails cartItemsCount={cartItemsCount} setCartItemsCount={setCartItemsCount} />} />
                   <Route path="/restaurants/:id/item/:mealId" element={<Item cartItemsCount={cartItemsCount} setCartItemsCount={setCartItemsCount} />} />
                   <Route path="/login" element={<LoginPage />} />
