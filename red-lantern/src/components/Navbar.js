@@ -1,21 +1,26 @@
-import React, { useState } from "react";
-import { Container, Form, Nav, Navbar, Button } from "react-bootstrap";
+import React from "react";
+import { Form, Nav, Button } from "react-bootstrap";
 import logo from "../assets/logo.png";
 import { useCartContext } from "../contexts/CartContext";
 import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
 
-export default function CustomNavbar({ signOut }) {
-  const { cartItems } = useCartContext();
-  const [navbarColor, setNavbarColor] = useState("bg-light");
+export default function CustomNavbar({ signOut, searchQuery, setSearchQuery }) {
   const navigation = useNavigate();
+  const { cartItems } = useCartContext();
+  const cartItemsCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const totalPrice = cartItems.reduce((total, item) => total + item.meal.price * item.quantity, 0);
+
   const toCart = () => {
     navigation("/cart");
   };
-  const cartItemsCount = cartItems.reduce((total, item) => total + item.quantity, 0);
-  const totalPrice = cartItems.reduce((total, item) => total + item.meal.price * item.quantity, 0);
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
   return (
-    <div className={`d-flex justify-content-between align-items-center ${navbarColor} text-black p-3`}>
+    <div className={`d-flex flex-column flex-md-row justify-content-between align-items-center bg-light text-black p-3`}>
       <div className="d-flex align-items-center gap-2">
         <Nav.Link href="/">
           <img src={logo} alt="HungryHub Logo" />
@@ -24,23 +29,13 @@ export default function CustomNavbar({ signOut }) {
         <Form className="d-flex">
           <Form.Control
             type="text"
-            placeholder="Search Restaurants"
+            placeholder="Search"
             className="btn-outline-danger"
             aria-label="Search"
             style={{ color: "red" }}
+            value={searchQuery}
+            onChange={handleSearchChange}
           />
-          <Button variant="outline-secondary">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              className="bi bi-search"
-              viewBox="0 0 16 16"
-            >
-              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-            </svg>
-          </Button>
         </Form>
       </div>
       <div className="d-flex align-items-center gap-3">
