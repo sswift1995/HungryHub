@@ -1,6 +1,6 @@
 # HungryHub
 ## Purpose
-A delivery prototype that allows users to order food and get it delivered to their door. It's a test app, there isn't any transaction being facilitated or any food delivered.
+A delivery prototype app that allows users to order food and get it delivered to their door. It's a test app, there isn't any transaction being facilitated or any food delivered.
 
 ## Built With
 - React - Front-end
